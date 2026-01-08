@@ -7,8 +7,7 @@
 *~
 .DS_Store
 
-# Source files (we ship transpiled code)
-src/
+# TypeScript config and babel config
 tsconfig.json
 tsconfig.build.json
 babel.config.js
