@@ -1,0 +1,55 @@
+# Development files
+.github
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Source files (we ship transpiled code)
+src/
+tsconfig.json
+tsconfig.build.json
+babel.config.js
+
+# Build tools
+.eslintrc.js
+.prettierrc
+
+# Tests
+__tests__/
+__mocks__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.travis.yml
+.gitlab-ci.yml
+circle.yml
+
+# Dependencies
+node_modules/
+
+# Temporary
+tmp/
+temp/
+
+# Build output to exclude
+android/build/
+android/.gradle/
+android/local.properties
+ios/build/
+ios/Pods/
