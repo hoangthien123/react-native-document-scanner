@@ -89,7 +89,8 @@ RCT_EXPORT_METHOD(scanDocument:(NSDictionary *)options
             [scannedImages addObject:base64String];
         } else {
             // Save to temporary directory and return file path
-            NSString *fileName = [NSString stringWithFormat:@"scanned_doc_%lu.jpg", (unsigned long)i];
+            NSString *timestamp = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970] * 1000];
+            NSString *fileName = [NSString stringWithFormat:@"scanned_doc_%@_%lu.jpg", timestamp, (unsigned long)i];
             NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
             
             NSError *error = nil;
