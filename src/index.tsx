@@ -1,7 +1,7 @@
 import { NativeModules, Platform } from 'react-native';
 
 const LINKING_ERROR =
-  `The package 'react-native-document-scanner' doesn't seem to be linked. Make sure: \n\n` +
+  'The package \'react-native-document-scanner\' doesn\'t seem to be linked. Make sure: \n\n' +
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
@@ -69,14 +69,14 @@ export interface ScanDocumentResponse {
 export const DocumentScanner = {
   /**
    * Start document scanning
-   * 
+   *
    * @param options - Optional configuration for the document scanner
    * @returns Promise that resolves with scanned document data or rejects with error
-   * 
+   *
    * @example
    * ```typescript
    * import { DocumentScanner } from 'react-native-document-scanner';
-   * 
+   *
    * try {
    *   const result = await DocumentScanner.scanDocument({
    *     maxNumDocuments: 3,
@@ -84,7 +84,7 @@ export const DocumentScanner = {
    *     croppedImageQuality: 100,
    *     responseType: 'base64'
    *   });
-   *   
+   *
    *   if (result.status === 'success') {
    *     console.log('Scanned images:', result.scannedImages);
    *   } else {
