@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.2'
+        classpath 'com.android.tools.build:gradle:7.2.2'
     }
 }
 
@@ -14,15 +14,29 @@ def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
 }
 
+def resolveReactNativeDirectory() {
+    def locations = [
+        "${rootProject.projectDir}/../node_modules/react-native/android",
+        "${rootProject.projectDir}/../../node_modules/react-native/android",
+        new File(projectDir, "../../../node_modules/react-native/android").canonicalPath
+    ]
+    
+    for (location in locations) {
+        def dir = file(location)
+        if (dir.exists()) {
+            return dir
+        }
+    }
+    return null
+}
+
 repositories {
     google()
     mavenCentral()
     
-    // Add React Native's maven repository to resolve react-android
-    // This is critical for the library to work as a dependency
-    def reactNativeAndroidDir = file("${rootProject.projectDir}/../node_modules/react-native/android")
-    if (reactNativeAndroidDir.exists()) {
-        maven { url reactNativeAndroidDir }
+    def reactNativeDir = resolveReactNativeDirectory()
+    if (reactNativeDir != null) {
+        maven { url reactNativeDir }
     }
 }
 
@@ -56,10 +70,14 @@ android {
 }
 
 dependencies {
-    // Use compileOnly for react-android to avoid bundling React Native
-    // The host app will provide the React Native runtime
-    compileOnly 'com.facebook.react:react-android'
+    // For React Native < 0.71, use react-native from local maven
+    // For React Native >= 0.71, use react-android
+    // compileOnly ensures the host app provides React Native at runtime
+    compileOnly "com.facebook.react:react-native:+"
     
-    implementation "androidx.appcompat:appcompat:1.7.0"
-    implementation "com.websitebeaver:documentscanner:1.3.4"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    
+    // Google ML Kit Document Scanner
+    def mlkitDocumentScannerVersion = safeExtGet('mlkitDocumentScannerVersion', '16.0.0')
+    implementation "com.google.android.gms:play-services-mlkit-document-scanner:${mlkitDocumentScannerVersion}"
 }
