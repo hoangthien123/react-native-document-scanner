@@ -1,6 +1,6 @@
 {
   "name": "rn-document-scanner-vision",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React Native library for scanning documents on iOS and Android",
   "main": "lib/commonjs/index.js",
   "module": "lib/module/index.js",
