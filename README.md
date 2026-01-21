@@ -16,13 +16,13 @@ A React Native library for scanning documents on iOS and Android. This library p
 ## Installation
 
 ```sh
-npm install react-native-document-scanner
+npm install rn-document-scanner-vision
 ```
 
 or
 
 ```sh
-yarn add react-native-document-scanner
+yarn add rn-document-scanner-vision
 ```
 
 ### iOS Setup
