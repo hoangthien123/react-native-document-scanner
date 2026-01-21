@@ -10,19 +10,30 @@ buildscript {
 
 apply plugin: 'com.android.library'
 
+def safeExtGet(prop, fallback) {
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+}
+
 repositories {
     google()
     mavenCentral()
+    
+    // Add React Native's maven repository to resolve react-android
+    // This is critical for the library to work as a dependency
+    def reactNativeAndroidDir = file("${rootProject.projectDir}/../node_modules/react-native/android")
+    if (reactNativeAndroidDir.exists()) {
+        maven { url reactNativeAndroidDir }
+    }
 }
 
 android {
-    compileSdk 34
+    compileSdk safeExtGet('compileSdkVersion', 34)
 
     namespace "com.rndocumentscanner"
 
     defaultConfig {
-        minSdk 21
-        targetSdk 34
+        minSdk safeExtGet('minSdkVersion', 21)
+        targetSdk safeExtGet('targetSdkVersion', 34)
         versionCode 1
         versionName "1.0"
     }
